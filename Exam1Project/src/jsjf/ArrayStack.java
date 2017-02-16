@@ -84,10 +84,18 @@ public class ArrayStack<T> implements StackADT<T>
      */
     public T peek() throws EmptyCollectionException
     {
-        if (isEmpty())
-            throw new EmptyCollectionException("stack");
-
-        return stack[top-1];
+        try
+        {
+            if (isEmpty())
+                throw new EmptyCollectionException("stack");
+            else
+                return stack[top-1];
+        }
+        catch(EmptyCollectionException e)
+        {
+            System.out.println("ERROR. Stack is empty! Cannot peek.");
+        }
+        return null;
     }
 
     /**
@@ -96,7 +104,7 @@ public class ArrayStack<T> implements StackADT<T>
      */
     public boolean isEmpty()
     {
-        // TODOCOSC2306
+        return(size() < 1);
     }
  
     /**
@@ -105,7 +113,7 @@ public class ArrayStack<T> implements StackADT<T>
      */
     public int size()
     {
-        // TODOCOSC2306
+        return top;
     }
 
     /**
@@ -114,7 +122,13 @@ public class ArrayStack<T> implements StackADT<T>
      */
     public String toString()
     {
-        // TODOCOSC2306
+        String answer = "";
+        
+        for(int i = 0; i < top; i++)
+        {
+            answer = answer + stack[i].toString() + "\n";
+        }
+        return answer;
     }
 }
 

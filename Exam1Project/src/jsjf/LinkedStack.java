@@ -44,14 +44,23 @@ public class LinkedStack<T> implements StackADT<T>
      */
     public T pop() throws EmptyCollectionException
     {
-        if (isEmpty())
-            throw new EmptyCollectionException("stack");
-
-        T result = top.getElement();
-        top = top.getNext();
-        count--;
- 
-        return result;
+        try
+        {
+            if (isEmpty())
+                throw new EmptyCollectionException("stack");
+            else
+            {
+                T result = top.getElement();
+                top = top.getNext();
+                count--;
+                return result;
+            }
+        }
+        catch(EmptyCollectionException e)
+        {
+            System.out.println("ERROR. LinkedStack is empty! cannot pop.");
+        }
+    return null;
     }
    
     /**
@@ -62,7 +71,18 @@ public class LinkedStack<T> implements StackADT<T>
      */
     public T peek() throws EmptyCollectionException
     {
-        // TODOCOSC2306
+        try
+        {
+            if (isEmpty())
+                throw new EmptyCollectionException("stack");
+            else
+                return top.getElement();
+        }
+        catch(EmptyCollectionException e)
+        {
+            System.out.println("ERROR. Linked stack is empty! Cannot peek.");
+        }
+        return null;
     }
 
     /**
@@ -71,7 +91,7 @@ public class LinkedStack<T> implements StackADT<T>
      */
     public boolean isEmpty()
     {
-        // TODOCOSC2306
+        return(top == null);
     }
  
     /**
@@ -80,7 +100,7 @@ public class LinkedStack<T> implements StackADT<T>
      */
     public int size()
     {
-        // TODOCOSC2306
+        return count;
     }
 
     /**
@@ -89,6 +109,14 @@ public class LinkedStack<T> implements StackADT<T>
      */
     public String toString()
     {
-        // TODOCOSC2306
+        String result = "";
+        LinearNode<T> iter = new LinearNode<T>();
+        iter = top;
+        while (iter != null)
+        {
+            result = result + iter.getElement().toString() + " ";
+            iter = iter.getNext();
+        }
+        return result;
     }
 }
