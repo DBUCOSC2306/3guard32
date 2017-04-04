@@ -36,7 +36,16 @@ public class ArrayUnorderedList<T> extends ArrayList<T>
      */
     public void addToFront(T element)
     {
-        // To be completed as a Programming Project
+         if (size() == list.length)
+            expandCapacity();
+
+        // shift elements up one 
+        for (int scan=rear; scan > 0; scan--)
+            list[scan] = list[scan-1];
+
+        list[0] = element;
+        rear++;
+		modCount++;
     }
 
     /**
@@ -46,7 +55,12 @@ public class ArrayUnorderedList<T> extends ArrayList<T>
      */
     public void addToRear(T element)
     {
-        // To be completed as a Programming Project
+        if (size() == list.length)
+            expandCapacity();
+
+        list[rear] = element;
+        rear++;
+		modCount++;
     }
 
     /**
